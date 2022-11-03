@@ -1,5 +1,11 @@
 my-config.name : default
 
+spring :
+  datasource :
+    uri : myEnvironment2
+    username : root
+    password : password
+    
 management :
   endpoints :
     web:
@@ -8,3 +14,4 @@ management :
   endpoint :
     shutdown :
       enabled : true
+      
