@@ -7,4 +7,4 @@ management :
         include : "*"
   endpoint :
     shutdown :
-      enabled : ture
+      enabled : true
