@@ -1,17 +1,18 @@
-my-config.name : default
-
-spring :
-  datasource :
-    uri : myEnvironment2
-    username : root
-    password : password
-    
-management :
-  endpoints :
-    web:
-      exposure :
-        include : "*"
-  endpoint :
-    shutdown :
-      enabled : true
-      
+spring:
+  datasource:
+    tenants:
+      default:
+        url: jdbc:postgresql://localhost:5432/tenant1
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
+      tenant1 :
+        url: jdbc:postgresql://localhost:5432/tenant1
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
+      tenant2:
+        url: jdbc:postgresql://localhost:5432/tenant2
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
