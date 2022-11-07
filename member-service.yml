@@ -1,3 +1,22 @@
+my-config.name : default
+#
+#spring :
+#  datasource :
+#    uri : myEnvironment2
+#    username : root
+#    password : password
+#
+#
+#    
+management :
+  endpoints :
+    web:
+      exposure :
+        include : "*"
+  endpoint :
+    shutdown :
+      enabled : true
+      
 spring:
   datasource:
     tenants:
