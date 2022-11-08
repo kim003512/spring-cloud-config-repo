@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/serverTimezone=Asia/Seoul&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    url: jdbc:postgresql://localhost:5432/tenant1
+    username: postgre
+    password: fasoo
+    driver-class-name: org.postgresql.Driver
