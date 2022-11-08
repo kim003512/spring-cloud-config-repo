@@ -9,3 +9,6 @@ datasource :
     username: postgres
     password: fasoo
     driver-class-name: org.postgresql.Driver
+
+name :
+  name : minjin
