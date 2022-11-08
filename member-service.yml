@@ -1,6 +1,5 @@
 spring:
   datasource:
-    tenants:
       default:
         url: jdbc:postgresql://localhost:5432/tenant1
         username: postgre
