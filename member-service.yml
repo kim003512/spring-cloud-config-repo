@@ -5,3 +5,8 @@ spring:
       username: postgre
       password: fasoo
       driver-class-name: org.postgresql.Driver
+    tenant2 :
+      url: jdbc:postgresql://localhost:5432/tenant2
+      username: postgre
+      password: fasoo
+      driver-class-name: org.postgresql.Driver
