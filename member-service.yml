@@ -5,13 +5,3 @@ spring:
       username: postgres
       password: fasoo
       driver-class-name: org.postgresql.Driver
-    kakao:
-      url: jdbc:postgresql://localhost:5432/tenant1
-      username: postgres
-      password: fasoo
-      driver-class-name: org.postgresql.Driver
-    naver:
-      url: jdbc:postgresql://localhost:5432/tenant2
-      username: postgres
-      password: fasoo
-      driver-class-name: org.postgresql.Driver
