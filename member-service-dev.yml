@@ -1,17 +1,18 @@
 spring:
   datasource:
-    default:
-      url: jdbc:postgresql://localhost:5432/tenant1
-      username: postgres
-      password: fasoo
-      driver-class-name: org.postgresql.Driver
-    kakao:
-      url: jdbc:postgresql://localhost:5432/tenant1
-      username: postgres
-      password: fasoo
-      driver-class-name: org.postgresql.Driver
-    naver:
-      url: jdbc:postgresql://localhost:5432/tenant2
-      username: postgres
-      password: fasoo
-      driver-class-name: org.postgresql.Driver
+    tenants :
+      default:
+        url: jdbc:postgresql://localhost:5432/tenant1
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
+      tenant1:
+        url: jdbc:postgresql://localhost:5432/tenant1
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
+      tenant2:
+        url: jdbc:postgresql://localhost:5432/tenant1
+        username: postgres
+        password: fasoo
+        driver-class-name: org.postgresql.Driver
