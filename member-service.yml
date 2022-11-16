@@ -2,17 +2,17 @@ spring:
   datasource:
     tenants :
       default:
-        url: jdbc:mysql://localhost:3306/employee?tenant1
+        url: jdbc:mysql://localhost:3306/tenant1
         username: root
         password: dkssud003512!!
         driver-class-name: com.mysql.cj.jdbc.Driver
       tenant1:
-        url: jdbc:mysql://localhost:3306/employee?tenant1
+        url: jdbc:mysql://localhost:3306/tenant1
         username: root
         password: dkssud003512!!
         driver-class-name: com.mysql.cj.jdbc.Driver
       tenant2:
-        url: jdbc:mysql://localhost:3306/employee?tenant2
+        url: jdbc:mysql://localhost:3306/tenant2
         username: root
         password: dkssud003512!!
         driver-class-name: com.mysql.cj.jdbc.Driver
