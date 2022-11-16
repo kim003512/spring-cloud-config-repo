@@ -2,17 +2,17 @@ spring:
   datasource:
     tenants :
       default:
-        url: jdbc:postgresql://localhost:5432/tenant1
-        username: postgres
-        password: fasoo
-        driver-class-name: org.postgresql.Driver
+        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant1
+        username: multiTenancy
+        password: fasoo1234!!
+        driver-class-name: com.mysql.cj.jdbc.Driver
       tenant1:
-        url: jdbc:postgresql://localhost:5432/tenant1
-        username: postgres
-        password: fasoo
-        driver-class-name: org.postgresql.Driver
+        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant1
+        username: multiTenancy
+        password: fasoo1234!!
+        driver-class-name: com.mysql.cj.jdbc.Driver
       tenant2:
-        url: jdbc:postgresql://localhost:5432/tenant2
-        username: postgres
-        password: fasoo
-        driver-class-name: org.postgresql.Driver
+        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant2
+        username: multiTenancy
+        password: fasoo1234!!
+        driver-class-name: com.mysql.cj.jdbc.Driver
