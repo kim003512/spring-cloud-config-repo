@@ -1,0 +1,267 @@
+server:
+  servlet:
+    context-path: gateway
+  port: 8080
+  ##servlet:
+   ##session:
+     ##timeout: 30m
+     
+## Cookie
+fasoo:
+  session:
+    cookie:
+      name : gateway-session
+    count: 500
+    idletime: 60
+
+## Netty
+netty:
+  parent:
+    group:
+      thread:
+        count: 3
+  child:
+    group:
+      thread:
+        count: 10
+
+## Services
+configenv:
+  protocol: http
+  url: localhost
+  port: 9090
+  context: config
+  
+##AUTH_ENV##
+authenv:
+  protocol: http
+  url: localhost
+  port: 9091
+  context: auth
+##AUTH_ENV##
+
+##FIDP_ENV##
+fidpenv:
+  protocol: http
+  url: localhost
+  port: 9095
+  context: fidp
+##FIDP_ENV##
+
+##PKI_ENV##
+pkienv:
+  protocol: http
+  url: localhost
+  port: 9097
+  context: pki
+##PKI_ENV##
+  
+##INFRA_ENV##
+infraenv:
+  protocol: http
+  url: localhost
+  port: 9094
+  context: infra
+##INFRA_ENV##
+
+##FLAS_ENV##
+flasenv:
+  protocol: http
+  url: localhost
+  port: 9092
+  context: flas
+##FLAS_ENV##
+
+##ISSUANCE_ENV##
+issuanceenv:
+  protocol: http
+  url: localhost
+  port: 9093
+  context: issuance
+##ISSUANCE_ENV##
+
+##FSP_ENV##
+fspenv:
+  protocol: http
+  url: localhost
+  port: #FSP_PORT#
+  context: fsp
+##FSP_ENV##
+
+##FXM_ENV##
+fxmenv:
+  protocol: http
+  url: localhost
+  port: #FXM_PORT#
+  context: fast
+##FXM_ENV##
+
+##FSS_ENV##
+fssenv:
+  protocol: http
+  url: localhost
+  port: 8081
+  context: fss
+##FSS_ENV##
+
+##LIVEUPDATE_ENV##
+liveupdateenv:
+  protocol: http
+  url: localhost
+  port: #LIVEUPDATE_PORT#
+  context: liveupdate
+##LIVEUPDATE_ENV##
+
+##FDR_POLICY_ENV##
+fdrpolicyenv:
+  protocol: http
+  url: localhost
+  port: #FDR_POLICY_PORT#
+  context: fdr
+##FDR_POLICY_ENV##
+
+##FDR_LOG_ENV##
+fdrlogenv:
+  protocol: http
+  url: localhost
+  port: #FDR_LOG_PORT#
+  context: fdrlog
+##FDR_LOG_ENV##
+
+# microservice url
+microservices: 
+  auth: 
+    url: ${authenv.protocol}://${authenv.url}:${authenv.port}/${authenv.context}
+  ui:
+    url: http://fsp4.local.fasoo.com:3000
+  userAccessible:
+    urls: 
+      - /fast
+
+# routing
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: ignore
+        uri: ${authenv.protocol}://${authenv.url}:${authenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/auth/oauth/token_key
+        filters:
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}      
+        
+      - id: config
+        uri: ${configenv.protocol}://${configenv.url}:${configenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/configuration/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: auth
+        uri: ${authenv.protocol}://${authenv.url}:${authenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/auth/**,/${server.servlet.context-path}/auth/oauth/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: fidp
+        uri: ${fidpenv.protocol}://${fidpenv.url}:${fidpenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fidp/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: infra
+        uri: ${infraenv.protocol}://${infraenv.url}:${infraenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/infra/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: flas
+        uri: ${flasenv.protocol}://${flasenv.url}:${flasenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/flas/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: issuance
+        uri: ${issuanceenv.protocol}://${issuanceenv.url}:${issuanceenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/issuance/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: pki
+        uri: ${pkienv.protocol}://${pkienv.url}:${pkienv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/pki/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: fsp
+        uri: ${fspenv.protocol}://${fspenv.url}:${fspenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fsp/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: fxm
+        uri: ${fxmenv.protocol}://${fxmenv.url}:${fxmenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fast/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: fss
+        uri: ${fssenv.protocol}://${fssenv.url}:${fssenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fss/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: liveupdate
+        uri: ${liveupdateenv.protocol}://${liveupdateenv.url}:${liveupdateenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/liveupdate/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+
+      - id: fdrpolicy
+        uri: ${fdrpolicyenv.protocol}://${fdrpolicyenv.url}:${fdrpolicyenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fdr/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+        
+      - id: fdrlog
+        uri: ${fdrlogenv.protocol}://${fdrlogenv.url}:${fdrlogenv.port}
+        predicates:
+        - Path=/${server.servlet.context-path}/fdrlog/**
+        filters:
+        - PreSessionFilter
+        - RewritePath=/${server.servlet.context-path}(?<remaining>/?.*), $\{remaining}
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: 
+          - "refresh"
+          - "loggers"
+
+logging:
+  level:
+    root: info              

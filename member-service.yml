@@ -1,18 +1,22 @@
-spring:
-  datasource:
-    tenants :
-      default:
-        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant1
-        username: multiTenancy
-        password: fasoo1234!!
-        driver-class-name: com.mysql.cj.jdbc.Driver
-      tenant1:
-        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant1
-        username: multiTenancy
-        password: fasoo1234!!
-        driver-class-name: com.mysql.cj.jdbc.Driver
-      tenant2:
-        url: jdbc:mysql://multitenancy.ctaoexhweli2.ap-northeast-2.rds.amazonaws.com:3306/tenant2
-        username: multiTenancy
-        password: fasoo1234!!
-        driver-class-name: com.mysql.cj.jdbc.Driver
+mt:
+  tenants:
+    default:
+      id: id1
+      name: name1
+      dsdcode: dsdcode1
+      datasource:
+        url: jdbc:postgresql://localhost:5432/tenant1
+        diver-class-name: org.postgresql.Driver
+        username: postgres
+        password: fasoo
+      license:
+    tenant1:
+      id: id2
+      name: name2
+      dsdcode: dsdcode2
+      datasource:
+        url:jdbc: postgresql://localhost:5432/tenant1
+        driver-class-name: org.postgresql.Driver
+        username: postgres
+        password: fasoo
+      license :
